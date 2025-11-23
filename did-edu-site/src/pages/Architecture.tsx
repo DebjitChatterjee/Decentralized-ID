@@ -1,4 +1,3 @@
-import React from 'react';
 import InteractiveDiagram from '../components/InteractiveDiagram';
 
 const Architecture = () => {

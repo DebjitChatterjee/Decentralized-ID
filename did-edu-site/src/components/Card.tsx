@@ -1,7 +1,13 @@
-import React from 'react';
 import { motion } from 'framer-motion';
 
-const Card = ({ title, description, icon, delay = 0 }) => {
+interface CardProps {
+    title: string;
+    description: string;
+    icon: any;
+    delay?: number;
+}
+
+const Card = ({ title, description, icon: Icon, delay = 0 }: CardProps) => {
     return (
         <motion.div
             className="card"
@@ -16,7 +22,7 @@ const Card = ({ title, description, icon, delay = 0 }) => {
             }}
         >
             <div style={{ color: 'var(--accent-primary)' }}>
-                {icon}
+                <Icon size={32} />
             </div>
             <h3 style={{ fontSize: '1.5rem', margin: 0 }}>{title}</h3>
             <p style={{ color: 'var(--text-secondary)', flex: 1 }}>{description}</p>

@@ -1,24 +1,25 @@
-import React, { useState } from 'react';
+import { useState } from 'react';
 import { motion } from 'framer-motion';
 import { RefreshCw, Search, FileCheck } from 'lucide-react';
 import CodeBlock from '../components/CodeBlock';
 import { generateDID, resolveDID } from '../utils/didUtils';
+import type { DIDGenerationResult, DIDDocument } from '../utils/didUtils';
 
 const Sandbox = () => {
     // Generator State
-    const [generatedData, setGeneratedData] = useState(null);
+    const [generatedData, setGeneratedData] = useState<DIDGenerationResult | null>(null);
     const [loading, setLoading] = useState(false);
     const [didType, setDidType] = useState('key');
 
     // Resolver State
     const [resolveInput, setResolveInput] = useState('');
-    const [resolveResult, setResolveResult] = useState(null);
+    const [resolveResult, setResolveResult] = useState<DIDDocument | null>(null);
     const [resolving, setResolving] = useState(false);
-    const [resolveError, setResolveError] = useState(null);
+    const [resolveError, setResolveError] = useState<string | null>(null);
 
     // VC State
     const [vcSubject, setVcSubject] = useState('');
-    const [vcData, setVcData] = useState(null);
+    const [vcData, setVcData] = useState<any | null>(null);
     const [issuing, setIssuing] = useState(false);
 
     const handleGenerate = async () => {
@@ -29,7 +30,7 @@ const Sandbox = () => {
             setResolveInput(data.did);
             setVcSubject(data.did); // Auto-fill VC subject
             setResolveResult(null);
-        } catch (e) {
+        } catch (e: any) {
             console.error(e);
         }
         setLoading(false);
@@ -42,8 +43,8 @@ const Sandbox = () => {
         try {
             const doc = await resolveDID(resolveInput);
             setResolveResult(doc);
-        } catch (e) {
-            setResolveError(e.message);
+        } catch (e: any) {
+            setResolveError(e.message || "Failed to resolve DID");
         }
         setResolving(false);
     };
@@ -183,6 +184,12 @@ const Sandbox = () => {
                             Resolve
                         </button>
                     </div>
+
+                    {resolveError && (
+                        <div style={{ color: 'red', marginBottom: '1rem' }}>
+                            {resolveError}
+                        </div>
+                    )}
 
                     {resolveResult && (
                         <motion.div initial={{ opacity: 0 }} animate={{ opacity: 1 }}>

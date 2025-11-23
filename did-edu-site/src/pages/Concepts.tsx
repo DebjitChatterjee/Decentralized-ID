@@ -1,7 +1,6 @@
-import React from 'react';
 import { motion } from 'framer-motion';
 
-const Section = ({ title, children, delay = 0 }) => (
+const Section = ({ title, children, delay = 0 }: { title: string, children: React.ReactNode, delay?: number }) => (
     <motion.div
         initial={{ opacity: 0, y: 20 }}
         whileInView={{ opacity: 1, y: 0 }}
@@ -41,14 +40,14 @@ const Concepts = () => {
                     }}>
                         <code>did:example:123456789abcdefghi</code>
                     </div>
-                    <p style={{ marginTop: '1rem' }}>
+                    <div style={{ marginTop: '1rem' }}>
                         A DID is a simple text string consisting of three parts:
                         <ul style={{ paddingLeft: '1.5rem', marginTop: '0.5rem' }}>
                             <li>The URI scheme identifier (<code>did</code>)</li>
                             <li>The identifier for the DID method (e.g., <code>key</code>, <code>web</code>, <code>ethr</code>)</li>
                             <li>The DID method-specific identifier</li>
                         </ul>
-                    </p>
+                    </div>
                 </Section>
 
                 <Section title="Verifiable Credentials (VCs)" delay={0.1}>

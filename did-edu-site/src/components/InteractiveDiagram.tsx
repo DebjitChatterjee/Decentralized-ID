@@ -2,7 +2,16 @@ import React, { useState } from 'react';
 import { motion } from 'framer-motion';
 import { User, Building, ShieldCheck, Database } from 'lucide-react';
 
-const Node = ({ icon, label, x, y, active, onClick }) => (
+interface NodeProps {
+    icon: React.ReactElement;
+    label: string;
+    x: string;
+    y: string;
+    active: boolean;
+    onClick: () => void;
+}
+
+const Node = ({ icon, label, x, y, active, onClick }: NodeProps) => (
     <motion.div
         onClick={onClick}
         style={{
@@ -28,15 +37,19 @@ const Node = ({ icon, label, x, y, active, onClick }) => (
             boxShadow: active ? '0 0 20px var(--accent-primary)' : 'none',
             transition: 'all 0.3s ease'
         }}>
-            {React.cloneElement(icon, { size: 32, color: active ? 'white' : 'var(--text-secondary)' })}
+            {React.cloneElement(icon, { size: 32, color: active ? 'white' : 'var(--text-secondary)' } as any)}
         </div>
         <p style={{ marginTop: '0.5rem', fontWeight: 'bold', color: active ? 'var(--accent-primary)' : 'var(--text-primary)' }}>{label}</p>
     </motion.div>
 );
 
-const Connection = ({ start, end, active }) => {
-    // Simple calculation for line coordinates (assuming 400x400 canvas for simplicity in relative terms)
-    // In a real app, we'd calculate this dynamically based on node positions
+interface ConnectionProps {
+    start: { x: string; y: string };
+    end: { x: string; y: string };
+    active: boolean;
+}
+
+const Connection = ({ start, end, active }: ConnectionProps) => {
     return (
         <svg style={{ position: 'absolute', top: 0, left: 0, width: '100%', height: '100%', pointerEvents: 'none', zIndex: 1 }}>
             <motion.line
@@ -86,7 +99,7 @@ const InteractiveDiagram = () => {
 
             <div style={{ marginTop: '2rem', textAlign: 'center' }}>
                 <div style={{ display: 'flex', justifyContent: 'center', gap: '1rem', marginBottom: '1rem' }}>
-                    {steps.map((step, index) => (
+                    {steps.map((_step, index) => (
                         <button
                             key={index}
                             onClick={() => setActiveStep(index)}

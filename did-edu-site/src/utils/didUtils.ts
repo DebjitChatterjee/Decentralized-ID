@@ -1,17 +1,38 @@
 // Simple simulation of DID generation and resolution
 // In a real app, this would use libraries like 'did-jwt', 'uport-connect', etc.
 
-export const generateDID = async (type = 'key') => {
+export interface DIDDocument {
+    "@context": string | string[];
+    id: string;
+    verificationMethod?: any[];
+    authentication?: string[];
+    assertionMethod?: string[];
+    service?: any[];
+    [key: string]: any;
+}
+
+export interface KeyPair {
+    publicKey: string;
+    privateKey: string;
+}
+
+export interface DIDGenerationResult {
+    did: string;
+    document: DIDDocument;
+    keyPair: KeyPair;
+}
+
+export const generateDID = async (type: string = 'key'): Promise<DIDGenerationResult> => {
     // Simulate network delay
     await new Promise(resolve => setTimeout(resolve, 800));
 
-    const keyPair = {
+    const keyPair: KeyPair = {
         publicKey: "0x" + Array.from({ length: 64 }, () => Math.floor(Math.random() * 16).toString(16)).join(''),
         privateKey: "0x" + Array.from({ length: 64 }, () => Math.floor(Math.random() * 16).toString(16)).join('')
     };
 
-    let did;
-    let document;
+    let did: string = '';
+    let document: DIDDocument = { "@context": "", id: "" };
 
     if (type === 'key') {
         // Simulate did:key (Ed25519)
@@ -56,7 +77,7 @@ export const generateDID = async (type = 'key') => {
     return { did, document, keyPair };
 };
 
-export const resolveDID = async (did) => {
+export const resolveDID = async (did: string): Promise<DIDDocument> => {
     await new Promise(resolve => setTimeout(resolve, 600));
 
     // Mock resolution logic

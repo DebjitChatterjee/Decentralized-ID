@@ -1,11 +1,10 @@
-import React from 'react';
 import { Link, useLocation } from 'react-router-dom';
 import { Shield } from 'lucide-react';
 
 const Navbar = () => {
   const location = useLocation();
 
-  const isActive = (path) => location.pathname === path;
+  const isActive = (path: string) => location.pathname === path;
 
   const navLinks = [
     { name: 'Concepts', path: '/concepts' },

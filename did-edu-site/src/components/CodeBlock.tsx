@@ -1,6 +1,13 @@
-import React from 'react';
+import { Prism as SyntaxHighlighter } from 'react-syntax-highlighter';
+import { vscDarkPlus } from 'react-syntax-highlighter/dist/esm/styles/prism';
 
-const CodeBlock = ({ code, language = 'json', title }) => {
+interface CodeBlockProps {
+    code: string;
+    language?: string;
+    title?: string;
+}
+
+const CodeBlock = ({ code, language = 'json', title }: CodeBlockProps) => {
     return (
         <div style={{
             background: '#1e1e1e',
@@ -24,16 +31,13 @@ const CodeBlock = ({ code, language = 'json', title }) => {
                     <span style={{ textTransform: 'uppercase', opacity: 0.6 }}>{language}</span>
                 </div>
             )}
-            <pre style={{
-                padding: '1rem',
-                margin: 0,
-                overflowX: 'auto',
-                fontSize: '0.9rem',
-                lineHeight: '1.5',
-                color: '#d4d4d4'
-            }}>
-                <code>{code}</code>
-            </pre>
+            <SyntaxHighlighter
+                language={language}
+                style={vscDarkPlus}
+                customStyle={{ margin: 0, borderRadius: '0 0 8px 8px', background: 'transparent' }}
+            >
+                {code}
+            </SyntaxHighlighter>
         </div>
     );
 };
