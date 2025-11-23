@@ -4,6 +4,7 @@ import Footer from './components/Footer';
 
 import Home from './pages/Home';
 import Concepts from './pages/Concepts';
+import Networks from './pages/Networks';
 import Architecture from './pages/Architecture';
 import Sandbox from './pages/Sandbox';
 import Guides from './pages/Guides';
@@ -17,6 +18,7 @@ function App() {
                     <Routes>
                         <Route path="/" element={<Home />} />
                         <Route path="/concepts" element={<Concepts />} />
+                        <Route path="/networks" element={<Networks />} />
                         <Route path="/architecture" element={<Architecture />} />
                         <Route path="/sandbox" element={<Sandbox />} />
                         <Route path="/guides" element={<Guides />} />
