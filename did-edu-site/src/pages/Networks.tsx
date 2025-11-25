@@ -1,5 +1,5 @@
 import { motion } from 'framer-motion';
-import { Globe, Key, Server, Database, Check, X, Info, Zap, Shield, Box } from 'lucide-react';
+import { Globe, Key, Server, Database, Check, X, Info, Box } from 'lucide-react';
 import { useState } from 'react';
 
 const Networks = () => {

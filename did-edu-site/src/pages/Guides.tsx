@@ -1,5 +1,5 @@
 import { motion } from 'framer-motion';
-import { Shield, Lock, Users, Database, Eye, Key, FileCheck, Globe, ExternalLink, ArrowRight } from 'lucide-react';
+import { Lock, Users, Database, Eye, Globe, ExternalLink, ArrowRight } from 'lucide-react';
 import { useState } from 'react';
 
 const Guides = () => {
